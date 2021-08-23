@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CoreDemo.Models;
+using CoreDemo.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,22 @@ namespace CoreDemo.Controllers
     public class StudentDetailsController : ControllerBase
     {
         private sql2019testContext db = new sql2019testContext();
+        #region Property  
+        private readonly IStudentService _studentService;
+        #endregion
+
+        #region Constructor  
+        public StudentDetailsController(IStudentService studentService)
+        {
+            _studentService = studentService;
+        }
+        #endregion
 
         // GET: api/StudentDetails
         [Microsoft.AspNetCore.Mvc.Route("GetStudentDetails")]
         public IQueryable<StudentDetail> GetStudentDetails()
         {
-            return db.StudentDetails;
+            return _studentService.GetStudentDetails();
         }
 
         // GET: api/StudentDetails/5
