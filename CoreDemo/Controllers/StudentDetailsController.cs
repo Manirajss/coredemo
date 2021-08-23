@@ -12,13 +12,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreDemo.Controllers
 {
-    [System.Web.Http.Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
     [ApiController]
     public class StudentDetailsController : ControllerBase
     {
         private sql2019testContext db = new sql2019testContext();
 
         // GET: api/StudentDetails
+        [Microsoft.AspNetCore.Mvc.Route("GetStudentDetails")]
         public IQueryable<StudentDetail> GetStudentDetails()
         {
             return db.StudentDetails;
